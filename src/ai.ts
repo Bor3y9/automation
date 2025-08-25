@@ -48,6 +48,8 @@ export function processTextMessage(text: string) {
   // 2. remove punctuation and stop words and then extract important keywords we need
   const words = lowerText.replace(/[^\w\s]/g, "").split(/\s+/);
   const filteredWords = words.filter((word) => word && !STOP_WORDS.has(word));
+  // #what does filterWords return ?
+  // 
   const keywords = new Counter(filteredWords)
     .mostCommon(5)
     .map((item: [string, number]) => item[0]);
@@ -55,18 +57,22 @@ export function processTextMessage(text: string) {
   // 3. specify the intent (او الغرض  الهدف )
   let intent: "LEAD" | "SUPPORT" | "INVOICE" | "OTHER" = "OTHER";
   if (
-    keywords.includes("dashboard") ||
-    keywords.includes("kpis") ||
-    keywords.includes("sales")
+    filteredWords.includes("dashboard") ||
+    filteredWords.includes("kpis") ||
+    filteredWords.includes("sales")
   ) {
     intent = "LEAD";
   } else if (
-    keywords.includes("help") ||
-    keywords.includes("issue") ||
-    keywords.includes("support")
+    filteredWords.includes("help") ||
+    filteredWords.includes("issue") ||
+    filteredWords.includes("support") ||
+    filteredWords.includes("assist")
   ) {
     intent = "SUPPORT";
-  } else if (keywords.includes("invoice") || keywords.includes("payment")) {
+  } else if (
+    filteredWords.includes("invoice") ||
+    filteredWords.includes("payment")
+  ) {
     intent = "INVOICE";
   }
 

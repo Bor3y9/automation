@@ -1,0 +1,18 @@
+{
+  "name": "Youssef",
+  "company": "VOIS",
+  "email": "ahmed@nile.com",
+  "phone": "01012345678",
+  "dates": [
+    "2025-09-25"
+  ],
+  "keywords": [
+    "youssef",
+    "vois",
+    "dashboard",
+    "sales",
+    "kpis"
+  ],
+  "intent": "LEAD",
+  "department": "Sales"
+}
